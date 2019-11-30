@@ -1,3 +1,4 @@
+import 'package:currency_converter/shared/final_row.dart';
 import 'package:currency_converter/shared/number_row.dart';
 import 'package:flutter/material.dart';
 
@@ -78,7 +79,14 @@ class _WhiteInputPageState extends State<WhiteInputPage> {
             updateCurrentInput: updateCurrentInput,
             currentInputValue: currentInput
           ),
-
+          SizedBox(height: 25.0),
+          finalRow(
+            color1: Colors.red,
+            color2: Colors.white,
+            updateCurrentInput: updateCurrentInput,
+            currentInputValue: currentInput,
+            context: context
+          )
         ],
       ),
     );
