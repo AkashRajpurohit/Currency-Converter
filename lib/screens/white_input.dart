@@ -1,4 +1,5 @@
 import 'package:currency_converter/shared/final_row.dart';
+import 'package:currency_converter/shared/font_size.dart';
 import 'package:currency_converter/shared/number_row.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,7 @@ class _WhiteInputPageState extends State<WhiteInputPage> {
               currentInput.toString(),
               style: TextStyle(
                 color: Colors.red,
-                fontSize: 100,
+                fontSize: getFontSize(currentInput.toString()),
                 fontWeight: FontWeight.bold
               )
             ),

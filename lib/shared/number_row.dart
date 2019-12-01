@@ -98,6 +98,8 @@ Widget numberRow(
 _calculateNumber(int number, int currentInputValue, Function updateCurrentInput) {
   if(currentInputValue == 0) {
     updateCurrentInput(number);
+  // } else if(currentInputValue.toString().length >= 5) {
+  //   updateCurrentInput(number);
   } else {
     updateCurrentInput((currentInputValue * 10) + number);
   }
