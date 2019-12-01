@@ -4,6 +4,7 @@ import 'package:currency_converter/screens/dashboard.dart';
 import 'package:currency_converter/shared/currency_list_names.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CurrencyService {
   // Get full name from currency short version
@@ -24,14 +25,18 @@ class CurrencyService {
       BuildContext context}) async {
     Map<String, dynamic> rates = await getConvertedCurrencyAmount(fromCurrency);
 
+    if(rates.isEmpty) {
+      // Show some toast about the error
+    }
+
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => DashboardPage(
               currencyVal: isWhite
-                  ? (amount * rates[toCurrency]).toStringAsFixed(2)
+                  ? (amount * rates[toCurrency] ?? 0).toStringAsFixed(2)
                   : amount,
               convertedCurrency: isWhite
                   ? amount
-                  : (amount * rates[toCurrency]).toStringAsFixed(2),
+                  : (amount * rates[toCurrency] ?? 0).toStringAsFixed(2),
               currenyOne: isWhite ? toCurrency : fromCurrency,
               currencyTwo: isWhite ? fromCurrency : toCurrency,
               isWhite: isWhite,
@@ -42,10 +47,67 @@ class CurrencyService {
       String fromCurrency) async {
     String baseURL = "https://api.exchangerate-api.com/v4/latest/";
 
-    Response response = await get('$baseURL/$fromCurrency');
+    try {
 
-    Map data = json.decode(response.body);
+      Map rates = await getCache(fromCurrency);
 
-    return data['rates'] ?? {};
+      if(rates != null) {
+        return rates;
+      }
+
+      Response response = await get('$baseURL/$fromCurrency');
+
+      Map data = json.decode(response.body);
+
+      await storeCache(fromCurrency, data['rates']);
+
+      return data['rates'];
+
+    } catch(e) {
+      print(e);
+      return {};
+    }
+  }
+
+  // Caching Data
+  Future storeCache(String currency, Map<String, dynamic> rates) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    Map<String, dynamic> cachedData = {
+      'rates': rates,
+      'expiry': new DateTime.now().toString()
+    };
+
+    prefs.setString(currency, json.encode(cachedData));
+  }
+
+  Future<Map<String, dynamic>> getCache(String currency) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    try {
+
+      String cachedData = prefs.getString(currency);
+      
+      if(cachedData == null) {
+        return null;
+      }
+
+      Map cache = json.decode(cachedData);
+
+      DateTime now = new DateTime.now();
+      DateTime expiry = DateTime.parse(cache['expiry']);
+      Duration difference = now.difference(expiry);
+
+      if(difference.inDays > 1) {
+        // Cache expired. Return null
+        return null;
+      } else {
+        return cache['rates'];
+      }
+
+    } catch(e) {
+      print(e);
+      return null;
+    }
   }
 }
