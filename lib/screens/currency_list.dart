@@ -1,4 +1,5 @@
 import 'package:currency_converter/screens/dashboard.dart';
+import 'package:currency_converter/shared/currency_list_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class CurrencyList extends StatefulWidget {
 }
 
 class _CurrencyListState extends State<CurrencyList> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,12 +43,12 @@ class _CurrencyListState extends State<CurrencyList> {
           ),
         ),
       ),
-      body: ListView(
-        children: <Widget>[
-          _getListItem('Russian Rubble', 'RBP'),
-          _getListItem('European Dollar', 'EUR'),
-        ],
-      ),
+      body: ListView.builder(
+        itemCount: currencyList.length,
+        itemBuilder: (context, index) {
+          return _getListItem(currencyList[index]['name'], currencyList[index]['shortName']);
+        },
+      )
     );
   }
 
@@ -66,7 +68,7 @@ class _CurrencyListState extends State<CurrencyList> {
       child: Padding(
         padding: EdgeInsets.only(left: 25.0, top: 20.0),
         child: Text(
-          newCurrencyName,
+          '$newCurrencyName ($newCurrencyShortName)',
           style: TextStyle(
             color: Colors.white,
             fontSize: 25.0,
