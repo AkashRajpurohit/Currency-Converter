@@ -1,7 +1,9 @@
+import 'package:currency_converter/screens/currency_list.dart';
 import 'package:currency_converter/screens/red_input.dart';
 import 'package:currency_converter/screens/white_input.dart';
 import 'package:currency_converter/services/currency.dart';
 import 'package:currency_converter/shared/font_size.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -58,7 +60,15 @@ class _DashboardPageState extends State<DashboardPage> {
                   children: <Widget>[
                     // SizedBox(height: 50),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(CupertinoPageRoute(
+                          builder: (context) => CurrencyList(
+                            currencyOneShortName: widget.currenyOne,
+                            currencyTwoShortName: widget.currencyTwo,
+                            isCurrencyOne: true
+                          )
+                        ));
+                      },
                       child: Text(
                         CurrencyService().getCurrency(widget.currenyOne),
                         style: TextStyle(color: Colors.white, fontSize: 26.0),
@@ -138,7 +148,15 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     // SizedBox(height: 20.0),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(CupertinoPageRoute(
+                          builder: (context) => CurrencyList(
+                            currencyOneShortName: widget.currenyOne,
+                            currencyTwoShortName: widget.currencyTwo,
+                            isCurrencyOne: false
+                          )
+                        ));
+                      },
                       child: Text(
                         CurrencyService().getCurrency(widget.currencyTwo),
                         style: TextStyle(color: Colors.red, fontSize: 26.0),

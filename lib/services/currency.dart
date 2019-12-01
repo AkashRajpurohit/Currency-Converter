@@ -7,6 +7,8 @@ class CurrencyService {
   String getCurrency(String currency) {
     if(currency == "USD") return "United State Dollar";
     else if(currency == "INR") return "Indian Rupee";
+    else if(currency == "RBP") return "Russian Rubble";
+    else if(currency == "EUR") return "European Dollar";
     else return currency;
   }
 
