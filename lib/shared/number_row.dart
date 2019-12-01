@@ -1,3 +1,4 @@
+import 'package:currency_converter/shared/toast.dart';
 import 'package:flutter/material.dart';
 
 Widget numberRow(
@@ -99,5 +100,7 @@ _calculateNumber(int number, int currentInputValue, Function updateCurrentInput)
     } else {
       updateCurrentInput((currentInputValue * 10) + number);
     }
+  } else {
+    ToastMessage(message: "Cannot exceed this limit").showMessage();
   }
 }
