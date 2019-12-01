@@ -27,6 +27,9 @@ Widget finalRow({
                 // Restart from 0
                 _removeLastOne(currentInputValue, updateCurrentInput);
               },
+              onLongPress: () {
+                _clearInput(updateCurrentInput);
+              },
               borderRadius: BorderRadius.circular(40.0),
               splashColor: color1,
               hoverColor: color1,
@@ -140,4 +143,8 @@ void _removeLastOne(int currentInputValue, Function updateCurrentInput) {
         int.parse(valueString.substring(0, valueString.length - 1));
     updateCurrentInput(updatedValue);
   }
+}
+
+void _clearInput(Function updateCurrentInput) {
+  updateCurrentInput(0);
 }
