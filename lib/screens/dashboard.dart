@@ -3,8 +3,8 @@ import 'package:currency_converter/services/currency.dart';
 import 'package:flutter/material.dart';
 
 class DashboardPage extends StatefulWidget {
-  final double currencyVal;
-  final double convertedCurrency;
+  final dynamic currencyVal;
+  final dynamic convertedCurrency;
   final String currenyOne;
   final String currencyTwo;
   final bool isWhite;
@@ -102,10 +102,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   // SizedBox(height: 40),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => WhiteInputPage(
                           originalCurrency: widget.currenyOne,
-                          convertedCurrency: widget.currencyTwo,
+                          convertedCurrency: widget.currencyTwo
                         )
                       ));
                     },

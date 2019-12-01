@@ -1,12 +1,14 @@
+import 'package:currency_converter/services/currency.dart';
 import 'package:flutter/material.dart';
 
 Widget finalRow(
-    {
-      int currentInputValue,
-      Color color1, 
-      Color color2,
-      Function updateCurrentInput,
-      BuildContext context
+    {int currentInputValue,
+    Color color1,
+    Color color2,
+    Function updateCurrentInput,
+    BuildContext context,
+    String fromCurrency,
+    String toCurrency,
     }) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -20,7 +22,12 @@ Widget finalRow(
         ),
         child: InkWell(
           onTap: () {
-            Navigator.pop(context);
+            // Restart from 0
+            CurrencyService().convertCurrency(
+                fromCurrency: fromCurrency,
+                toCurrency: toCurrency,
+                amount: 0,
+                context: context);
           },
           borderRadius: BorderRadius.circular(40.0),
           splashColor: color1,
@@ -28,11 +35,7 @@ Widget finalRow(
           focusColor: color1,
           highlightColor: color1,
           child: Center(
-            child: Icon(
-              Icons.arrow_drop_down,
-              color: color2,
-              size: 60.0
-            ),
+            child: Icon(Icons.arrow_drop_down, color: color2, size: 60.0),
           ),
         ),
       ),
@@ -70,7 +73,11 @@ Widget finalRow(
         ),
         child: InkWell(
           onTap: () {
-            
+            CurrencyService().convertCurrency(
+                fromCurrency: fromCurrency,
+                toCurrency: toCurrency,
+                amount: currentInputValue,
+                context: context);
           },
           borderRadius: BorderRadius.circular(40.0),
           splashColor: color1,
@@ -78,11 +85,7 @@ Widget finalRow(
           focusColor: color1,
           highlightColor: color1,
           child: Center(
-            child: Icon(
-              Icons.check,
-              color: color2,
-              size: 25.0
-            ),
+            child: Icon(Icons.check, color: color2, size: 25.0),
           ),
         ),
       ),
@@ -90,8 +93,9 @@ Widget finalRow(
   );
 }
 
-_calculateNumber(int number, int currentInputValue, Function updateCurrentInput) {
-  if(currentInputValue == 0) {
+_calculateNumber(
+    int number, int currentInputValue, Function updateCurrentInput) {
+  if (currentInputValue == 0) {
     updateCurrentInput(number);
   } else {
     updateCurrentInput((currentInputValue * 10) + number);
