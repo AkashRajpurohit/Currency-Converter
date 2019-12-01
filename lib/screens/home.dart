@@ -1,4 +1,4 @@
-import 'package:currency_converter/screens/dashboard.dart';
+import 'package:currency_converter/services/currency.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,6 +9,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return DashboardPage(currenyOne: 'USD', currencyTwo: 'INR', currencyVal: 1.00, convertedCurrency: 74.32, isWhite: false);
+
+    CurrencyService().convertCurrency(
+      fromCurrency: 'USD',
+      toCurrency: 'INR',
+      amount: 1,
+      context: context,
+      isWhite: false
+    );
+
+    return Scaffold(
+      backgroundColor: Colors.red[700],
+      body: Center(
+        child: CircleAvatar(
+          backgroundImage: AssetImage('assets/icon.png'),
+          radius: 75.0,
+        ),
+      ),
+    );
   }
 }
