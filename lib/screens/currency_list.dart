@@ -65,8 +65,12 @@ class _CurrencyListState extends State<CurrencyList> {
           )
         ));
       },
+      splashColor: Colors.red,
+      hoverColor: Colors.red,
+      highlightColor: Colors.red,
+      focusColor: Colors.red,
       child: Padding(
-        padding: EdgeInsets.only(left: 25.0, top: 20.0),
+        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0 ),
         child: Text(
           '$newCurrencyName ($newCurrencyShortName)',
           style: TextStyle(
