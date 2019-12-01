@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:currency_converter/screens/dashboard.dart';
 import 'package:currency_converter/shared/currency_list_names.dart';
+import 'package:currency_converter/shared/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,22 +27,20 @@ class CurrencyService {
       BuildContext context}) async {
     Map<String, dynamic> rates = await getConvertedCurrencyAmount(fromCurrency);
 
-    if(rates.isEmpty) {
-      // Show some toast about the error
+    if (rates.isNotEmpty) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => DashboardPage(
+                currencyVal: isWhite
+                    ? (amount * rates[toCurrency] ?? 0).toStringAsFixed(2)
+                    : amount,
+                convertedCurrency: isWhite
+                    ? amount
+                    : (amount * rates[toCurrency] ?? 0).toStringAsFixed(2),
+                currenyOne: isWhite ? toCurrency : fromCurrency,
+                currencyTwo: isWhite ? fromCurrency : toCurrency,
+                isWhite: isWhite,
+              )));
     }
-
-    Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => DashboardPage(
-              currencyVal: isWhite
-                  ? (amount * rates[toCurrency] ?? 0).toStringAsFixed(2)
-                  : amount,
-              convertedCurrency: isWhite
-                  ? amount
-                  : (amount * rates[toCurrency] ?? 0).toStringAsFixed(2),
-              currenyOne: isWhite ? toCurrency : fromCurrency,
-              currencyTwo: isWhite ? fromCurrency : toCurrency,
-              isWhite: isWhite,
-            )));
   }
 
   Future<Map<String, dynamic>> getConvertedCurrencyAmount(
@@ -48,12 +48,15 @@ class CurrencyService {
     String baseURL = "https://api.exchangerate-api.com/v4/latest/";
 
     try {
-
       Map rates = await getCache(fromCurrency);
 
-      if(rates != null) {
+      if (rates != null) {
         return rates;
       }
+
+      ToastMessage(
+              message: "Please wait while we load today's conversion rates.")
+          .showMessage();
 
       Response response = await get('$baseURL/$fromCurrency');
 
@@ -62,9 +65,13 @@ class CurrencyService {
       await storeCache(fromCurrency, data['rates']);
 
       return data['rates'];
-
-    } catch(e) {
-      print(e);
+    } on SocketException {
+      ToastMessage(message: "Please have an active internet connection.")
+          .showMessage();
+      return {};
+    } catch (e) {
+      ToastMessage(message: "Something went wrong. Please try again later")
+          .showMessage();
       return {};
     }
   }
@@ -85,10 +92,9 @@ class CurrencyService {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
-
       String cachedData = prefs.getString(currency);
-      
-      if(cachedData == null) {
+
+      if (cachedData == null) {
         return null;
       }
 
@@ -98,14 +104,13 @@ class CurrencyService {
       DateTime expiry = DateTime.parse(cache['expiry']);
       Duration difference = now.difference(expiry);
 
-      if(difference.inDays > 1) {
+      if (difference.inDays > 1) {
         // Cache expired. Return null
         return null;
       } else {
         return cache['rates'];
       }
-
-    } catch(e) {
+    } catch (e) {
       print(e);
       return null;
     }
