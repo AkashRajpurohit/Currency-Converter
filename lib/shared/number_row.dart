@@ -22,7 +22,6 @@ Widget numberRow(
         ),
         child: InkWell(
           onTap: () {
-            print(number1);
             _calculateNumber(number1, currentInputValue, updateCurrentInput);
           },
           borderRadius: BorderRadius.circular(40.0),
@@ -48,7 +47,6 @@ Widget numberRow(
         ),
         child: InkWell(
           onTap: () {
-            print(number2);
             _calculateNumber(number2, currentInputValue, updateCurrentInput);
           },
           borderRadius: BorderRadius.circular(40.0),
@@ -74,7 +72,6 @@ Widget numberRow(
         ),
         child: InkWell(
           onTap: () {
-            print(number3);
             _calculateNumber(number3, currentInputValue, updateCurrentInput);
           },
           borderRadius: BorderRadius.circular(40.0),
@@ -96,11 +93,11 @@ Widget numberRow(
 }
 
 _calculateNumber(int number, int currentInputValue, Function updateCurrentInput) {
-  if(currentInputValue == 0) {
-    updateCurrentInput(number);
-  // } else if(currentInputValue.toString().length >= 5) {
-  //   updateCurrentInput(number);
-  } else {
-    updateCurrentInput((currentInputValue * 10) + number);
+  if(currentInputValue < 100000000) {
+    if(currentInputValue == 0) {
+      updateCurrentInput(number);
+    } else {
+      updateCurrentInput((currentInputValue * 10) + number);
+    }
   }
 }

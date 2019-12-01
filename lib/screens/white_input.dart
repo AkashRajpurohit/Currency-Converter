@@ -23,74 +23,72 @@ class _WhiteInputPageState extends State<WhiteInputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          SizedBox(height: 45.0),
-          InkWell(
-            onTap: () {
-              setState(() => currentInput = 0);
-            },
-            child: Text(
-              'Tap to delete',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold
+      body: Padding(
+        padding: EdgeInsets.only(top: 40.0, bottom: 5.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            InkWell(
+              onTap: () {
+                setState(() => currentInput = 0);
+              },
+              child: Text(
+                'Tap to delete',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 10.0),
-          Center(
-            child: Text(
-              currentInput.toString(),
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: getFontSize(currentInput.toString()),
-                fontWeight: FontWeight.bold
-              )
+            Center(
+              child: Text(
+                currentInput.toString(),
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: getFontSize(currentInput.toString()) - 10.0,
+                  fontWeight: FontWeight.bold
+                )
+              ),
             ),
-          ),
-          SizedBox(height: 25.0),
-          numberRow(
-            number1: 1, 
-            number2: 2, 
-            number3: 3, 
-            color1: Colors.red, 
-            color2: Colors.white,
-            updateCurrentInput: updateCurrentInput,
-            currentInputValue: currentInput
-          ),
-          SizedBox(height: 25.0),
-          numberRow(
-            number1: 4, 
-            number2: 5, 
-            number3: 6, 
-            color1: Colors.red, 
-            color2: Colors.white,
-            updateCurrentInput: updateCurrentInput,
-            currentInputValue: currentInput
-          ),
-          SizedBox(height: 25.0),
-          numberRow(
-            number1: 7, 
-            number2: 8, 
-            number3: 9, 
-            color1: Colors.red, 
-            color2: Colors.white,
-            updateCurrentInput: updateCurrentInput,
-            currentInputValue: currentInput
-          ),
-          SizedBox(height: 25.0),
-          finalRow(
-            color1: Colors.red,
-            color2: Colors.white,
-            updateCurrentInput: updateCurrentInput,
-            currentInputValue: currentInput,
-            context: context,
-            fromCurrency: widget.convertedCurrency,
-            toCurrency: widget.originalCurrency
-          )
-        ],
+            numberRow(
+              number1: 1, 
+              number2: 2, 
+              number3: 3, 
+              color1: Colors.red, 
+              color2: Colors.white,
+              updateCurrentInput: updateCurrentInput,
+              currentInputValue: currentInput
+            ),
+            numberRow(
+              number1: 4, 
+              number2: 5, 
+              number3: 6, 
+              color1: Colors.red, 
+              color2: Colors.white,
+              updateCurrentInput: updateCurrentInput,
+              currentInputValue: currentInput
+            ),
+            numberRow(
+              number1: 7, 
+              number2: 8, 
+              number3: 9, 
+              color1: Colors.red, 
+              color2: Colors.white,
+              updateCurrentInput: updateCurrentInput,
+              currentInputValue: currentInput
+            ),
+            finalRow(
+              color1: Colors.red,
+              color2: Colors.white,
+              updateCurrentInput: updateCurrentInput,
+              currentInputValue: currentInput,
+              context: context,
+              fromCurrency: widget.convertedCurrency,
+              toCurrency: widget.originalCurrency
+            )
+          ],
+        ),
       ),
     );
   }

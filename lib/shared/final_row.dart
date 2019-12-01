@@ -122,10 +122,12 @@ Widget finalRow({
 
 void _calculateNumber(
     int number, int currentInputValue, Function updateCurrentInput) {
-  if (currentInputValue == 0) {
-    updateCurrentInput(number);
-  } else {
-    updateCurrentInput((currentInputValue * 10) + number);
+  if (currentInputValue < 100000000) {
+    if (currentInputValue == 0) {
+      updateCurrentInput(number);
+    } else {
+      updateCurrentInput((currentInputValue * 10) + number);
+    }
   }
 }
 
