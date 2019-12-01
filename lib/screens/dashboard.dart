@@ -1,3 +1,4 @@
+import 'package:currency_converter/screens/red_input.dart';
 import 'package:currency_converter/screens/white_input.dart';
 import 'package:currency_converter/services/currency.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,14 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   SizedBox(height: 20.0),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => RedInputPage(
+                          originalCurrency: widget.currenyOne,
+                          convertedCurrency: widget.currencyTwo
+                        )
+                      ));
+                    },
                     child: Text(
                       widget.currencyVal.toString(),
                       style: TextStyle(
