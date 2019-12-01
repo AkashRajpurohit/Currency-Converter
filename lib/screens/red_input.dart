@@ -86,7 +86,8 @@ class _RedInputPageState extends State<RedInputPage> {
               currentInputValue: currentInput,
               context: context,
               fromCurrency: widget.originalCurrency,
-              toCurrency: widget.convertedCurrency
+              toCurrency: widget.convertedCurrency,
+              isWhite: false
             )
           ],
         ),

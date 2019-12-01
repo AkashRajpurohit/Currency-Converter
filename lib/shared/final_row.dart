@@ -9,6 +9,7 @@ Widget finalRow({
   BuildContext context,
   String fromCurrency,
   String toCurrency,
+  bool isWhite
 }) {
   return Column(
     children: <Widget>[
@@ -80,6 +81,7 @@ Widget finalRow({
                     fromCurrency: fromCurrency,
                     toCurrency: toCurrency,
                     amount: currentInputValue,
+                    isWhite: isWhite,
                     context: context);
               },
               borderRadius: BorderRadius.circular(40.0),
@@ -104,6 +106,7 @@ Widget finalRow({
                     fromCurrency: fromCurrency,
                     toCurrency: toCurrency,
                     amount: 0,
+                    isWhite: isWhite,
                     context: context);
               },
               splashColor: Colors.transparent,

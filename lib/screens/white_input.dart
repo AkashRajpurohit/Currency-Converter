@@ -85,7 +85,8 @@ class _WhiteInputPageState extends State<WhiteInputPage> {
               currentInputValue: currentInput,
               context: context,
               fromCurrency: widget.convertedCurrency,
-              toCurrency: widget.originalCurrency
+              toCurrency: widget.originalCurrency,
+              isWhite: true
             )
           ],
         ),
