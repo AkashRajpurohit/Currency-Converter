@@ -1,3 +1,4 @@
+import 'package:currency_converter/screens/about.dart';
 import 'package:currency_converter/screens/dashboard.dart';
 import 'package:currency_converter/shared/currency_list_names.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,6 +43,21 @@ class _CurrencyListState extends State<CurrencyList> {
             },
           ),
         ),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0, top: 10.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => AboutPage()
+                ));
+              },
+              icon: Icon(Icons.error_outline),
+              iconSize: 35.0,
+              color: Colors.white
+            )
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: currencyList.length,

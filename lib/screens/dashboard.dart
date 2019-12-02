@@ -58,7 +58,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    // SizedBox(height: 50),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).pushReplacement(CupertinoPageRoute(
@@ -74,7 +73,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         style: TextStyle(color: Colors.white, fontSize: 26.0),
                       ),
                     ),
-                    // SizedBox(height: 20.0),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -97,7 +95,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           fontSize: 18.0,
                           letterSpacing: 1.0),
                     ),
-                    // SizedBox(height: 25.0),
                     Container(
                       height: 125.0,
                       width: 125.0,
@@ -122,7 +119,6 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                       ),
                     ),
-                    // SizedBox(height: 25.0),
                     Text(
                       widget.currencyTwo,
                       style: TextStyle(
@@ -130,7 +126,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           fontSize: 18.0,
                           letterSpacing: 1.0),
                     ),
-                    // SizedBox(height: 40),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -146,7 +141,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     ),
-                    // SizedBox(height: 20.0),
                     InkWell(
                       onTap: () {
                         Navigator.of(context).pushReplacement(CupertinoPageRoute(
