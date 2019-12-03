@@ -104,7 +104,7 @@ class CurrencyService {
       DateTime expiry = DateTime.parse(cache['expiry']);
       Duration difference = now.difference(expiry);
 
-      if (difference.inDays > 1) {
+      if (difference.inHours > 12) {
         // Cache expired. Return null
         return null;
       } else {
