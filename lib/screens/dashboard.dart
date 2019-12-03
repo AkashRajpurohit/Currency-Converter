@@ -54,7 +54,7 @@ class _DashboardPageState extends State<DashboardPage> {
           Container(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.only(top: 25.0, bottom: 25.0),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -155,6 +155,23 @@ class _DashboardPageState extends State<DashboardPage> {
                         CurrencyService().getCurrency(widget.currencyTwo),
                         style: TextStyle(color: Colors.red, fontSize: 26.0),
                       ),
+                    ),
+                    Row(
+                    	mainAxisAlignment: MainAxisAlignment.center,
+                    	children: <Widget>[
+                    		Text(
+                    			"Made in ",
+                    			style: TextStyle(
+                    				color: Colors.red,
+                    				fontSize: 14.0
+                    			)
+                    		),
+                    		Image(
+                    			image: AssetImage('assets/india_flag.png'),
+                    			width: 20.0,
+                    			height: 20.0
+                    		)
+                    	]
                     ),
                   ],
                 ),
