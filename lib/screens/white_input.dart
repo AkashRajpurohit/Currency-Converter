@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 class WhiteInputPage extends StatefulWidget {
 
-  final String originalCurrency; //USD
-  final String convertedCurrency; //INR
+  final String originalCurrency;
+  final String convertedCurrency;
 
   WhiteInputPage({ this.originalCurrency, this.convertedCurrency });
 

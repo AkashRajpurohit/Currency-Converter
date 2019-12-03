@@ -1,3 +1,4 @@
+import 'package:currency_converter/screens/dashboard.dart';
 import 'package:currency_converter/services/currency.dart';
 import 'package:currency_converter/shared/toast.dart';
 import 'package:flutter/material.dart';
@@ -103,12 +104,14 @@ Widget finalRow({
           child: Center(
             child: InkWell(
               onTap: () {
-                CurrencyService().convertCurrency(
-                    fromCurrency: fromCurrency,
-                    toCurrency: toCurrency,
-                    amount: 0,
-                    isWhite: isWhite,
-                    context: context);
+                 Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => DashboardPage(
+                          currencyVal: 0.0,
+                          convertedCurrency: 0.0,
+                          currenyOne: isWhite ? toCurrency : fromCurrency,
+                          currencyTwo: isWhite ? fromCurrency : toCurrency,
+                          isWhite: isWhite,
+                        )));
               },
               splashColor: Colors.transparent,
               hoverColor: Colors.transparent,
