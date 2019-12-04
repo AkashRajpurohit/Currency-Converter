@@ -8,7 +8,7 @@ Design Inspiration - [Art by Oleg Frolov](https://dribbble.com/shots/4816296-Sty
 
 ## App Screenshots 
 
-<img src="mockups/Feature_Graphic.png" height="50%" width="50%">&nbsp;
+<img src="mockups/Feature_Graphic.png"><br />
 <img src="mockups/1.png" height="30%" width="30%">&nbsp;
 <img src="mockups/2.png" height="30%" width="30%">&nbsp;
 <img src="mockups/3.png" height="30%" width="30%">&nbsp;
