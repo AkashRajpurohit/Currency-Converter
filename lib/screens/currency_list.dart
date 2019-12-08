@@ -65,7 +65,7 @@ class _CurrencyListState extends State<CurrencyList> {
                   builder: (context) => AboutPage()
                 ));
               },
-              icon: Icon(Icons.error_outline),
+              icon: Icon(Icons.person),
               iconSize: 35.0,
               color: Colors.white
             )
