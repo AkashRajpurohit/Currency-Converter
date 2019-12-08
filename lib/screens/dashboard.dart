@@ -63,7 +63,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           builder: (context) => CurrencyList(
                             currencyOneShortName: widget.currenyOne,
                             currencyTwoShortName: widget.currencyTwo,
-                            isCurrencyOne: true
+                            isWhite: false
                           )
                         ));
                       },
@@ -146,7 +146,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           builder: (context) => CurrencyList(
                             currencyOneShortName: widget.currenyOne,
                             currencyTwoShortName: widget.currencyTwo,
-                            isCurrencyOne: false
+                            isWhite: true
                           )
                         ));
                       },
