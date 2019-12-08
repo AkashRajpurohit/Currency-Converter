@@ -67,9 +67,17 @@ class _DashboardPageState extends State<DashboardPage> {
                           )
                         ));
                       },
-                      child: Text(
-                        CurrencyService().getCurrency(widget.currenyOne),
-                        style: TextStyle(color: Colors.white, fontSize: 26.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(width: 30.0),
+                          Text(
+                            CurrencyService().getCurrency(widget.currenyOne),
+                            style: TextStyle(color: Colors.white, fontSize: 26.0),
+                          ),
+                          SizedBox(width: 5.0),
+                          Icon(Icons.edit, color: Colors.white, size: 25.0)
+                        ],
                       ),
                     ),
                     InkWell(
@@ -150,9 +158,17 @@ class _DashboardPageState extends State<DashboardPage> {
                           )
                         ));
                       },
-                      child: Text(
-                        CurrencyService().getCurrency(widget.currencyTwo),
-                        style: TextStyle(color: Colors.red, fontSize: 26.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(width: 30.0),
+                          Text(
+                            CurrencyService().getCurrency(widget.currencyTwo),
+                            style: TextStyle(color: Colors.red, fontSize: 26.0),
+                          ),
+                          SizedBox(width: 5.0),
+                          Icon(Icons.edit, color: Colors.red, size: 25.0)
+                        ],
                       ),
                     ),
                     Row(
