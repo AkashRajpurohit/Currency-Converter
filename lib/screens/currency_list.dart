@@ -5,18 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyList extends StatefulWidget {
-
   final String currencyOneShortName;
   final String currencyTwoShortName;
   final bool isWhite;
 
-  CurrencyList({ this.currencyOneShortName, this.currencyTwoShortName, this.isWhite });
+  CurrencyList(
+      {this.currencyOneShortName, this.currencyTwoShortName, this.isWhite});
   @override
   _CurrencyListState createState() => _CurrencyListState();
 }
 
 class _CurrencyListState extends State<CurrencyList> {
-
   TextEditingController _editingController = new TextEditingController();
   String filter = "";
 
@@ -44,32 +43,21 @@ class _CurrencyListState extends State<CurrencyList> {
             color: Colors.white,
             iconSize: 40.0,
             onPressed: () {
-              Navigator.of(context).pushReplacement(CupertinoPageRoute(
-                builder: (context) => DashboardPage(
-                  currencyVal: 0.0,
-                  convertedCurrency: 0.0,
-                  currenyOne: widget.currencyOneShortName,
-                  currencyTwo: widget.currencyTwoShortName,
-                  isWhite: widget.isWhite,
-                )
-              ));
+              Navigator.of(context).pop();
             },
           ),
         ),
         actions: <Widget>[
           Padding(
-            padding: EdgeInsets.only(right: 20.0, top: 10.0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AboutPage()
-                ));
-              },
-              icon: Icon(Icons.person),
-              iconSize: 35.0,
-              color: Colors.white
-            )
-          ),
+              padding: EdgeInsets.only(right: 20.0, top: 10.0),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => AboutPage()));
+                  },
+                  icon: Icon(Icons.person),
+                  iconSize: 35.0,
+                  color: Colors.white)),
         ],
       ),
       body: Column(
@@ -77,38 +65,22 @@ class _CurrencyListState extends State<CurrencyList> {
           Padding(
             padding: EdgeInsets.all(20.0),
             child: TextField(
-              style: TextStyle(
-                color: Colors.white
-              ),
+              style: TextStyle(color: Colors.white),
               cursorColor: Colors.white12,
               decoration: InputDecoration(
-                hasFloatingPlaceholder: true,
-                alignLabelWithHint: true,
-                labelText: 'Search',
-                labelStyle: TextStyle(
-                  color: Colors.white
-                ),
-                hintText: 'Type currency name or short code',
-                hintStyle: TextStyle(
-                  color: Colors.white54
-                ),
-                prefixIcon: Icon(Icons.search),
-                prefixStyle: TextStyle(
-                  color: Colors.white
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                    width: 2.0
-                  )
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white60,
-                    width: 2.0
-                  )
-                )
-              ),
+                  hasFloatingPlaceholder: true,
+                  alignLabelWithHint: true,
+                  labelText: 'Search',
+                  labelStyle: TextStyle(color: Colors.white),
+                  hintText: 'Type currency name or short code',
+                  hintStyle: TextStyle(color: Colors.white54),
+                  prefixIcon: Icon(Icons.search),
+                  prefixStyle: TextStyle(color: Colors.white),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 2.0)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white60, width: 2.0))),
               controller: _editingController,
             ),
           ),
@@ -116,11 +88,18 @@ class _CurrencyListState extends State<CurrencyList> {
             child: ListView.builder(
               itemCount: currencyList.length,
               itemBuilder: (BuildContext context, int index) {
-                return filter == null || filter == "" 
-                  ? _getListItem(currencyList[index]['name'], currencyList[index]['shortName'])
-                  : currencyList[index]['name'].toLowerCase().contains(filter.toLowerCase()) || currencyList[index]['shortName'].toLowerCase().contains(filter.toLowerCase())
-                    ? _getListItem(currencyList[index]['name'], currencyList[index]['shortName'])
-                    : Container();
+                return filter == null || filter == ""
+                    ? _getListItem(currencyList[index]['name'],
+                        currencyList[index]['shortName'])
+                    : currencyList[index]['name']
+                                .toLowerCase()
+                                .contains(filter.toLowerCase()) ||
+                            currencyList[index]['shortName']
+                                .toLowerCase()
+                                .contains(filter.toLowerCase())
+                        ? _getListItem(currencyList[index]['name'],
+                            currencyList[index]['shortName'])
+                        : Container();
               },
             ),
           ),
@@ -132,29 +111,31 @@ class _CurrencyListState extends State<CurrencyList> {
   Widget _getListItem(String newCurrencyName, String newCurrencyShortName) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushReplacement(CupertinoPageRoute(
-          builder: (context) => DashboardPage(
-            currencyVal: 0.0,
-            convertedCurrency: 0.0,
-            currenyOne: widget.isWhite ? widget.currencyOneShortName : newCurrencyShortName ,
-            currencyTwo: widget.isWhite ? newCurrencyShortName : widget.currencyTwoShortName,
-            isWhite: widget.isWhite,
-          )
-        ));
+        Navigator.of(context).pushAndRemoveUntil(
+            CupertinoPageRoute(
+                builder: (context) => DashboardPage(
+                      currencyVal: 0.0,
+                      convertedCurrency: 0.0,
+                      currenyOne: widget.isWhite
+                          ? widget.currencyOneShortName
+                          : newCurrencyShortName,
+                      currencyTwo: widget.isWhite
+                          ? newCurrencyShortName
+                          : widget.currencyTwoShortName,
+                      isWhite: widget.isWhite,
+                    )),
+            ModalRoute.withName('/'));
       },
       splashColor: Colors.red,
       hoverColor: Colors.red,
       highlightColor: Colors.red,
       focusColor: Colors.red,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0 ),
+        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
         child: Text(
           '$newCurrencyName ($newCurrencyShortName)',
           style: TextStyle(
-            color: Colors.white,
-            fontSize: 25.0,
-            fontWeight: FontWeight.bold
-          ),
+              color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.bold),
         ),
       ),
     );

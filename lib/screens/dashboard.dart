@@ -59,7 +59,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   children: <Widget>[
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(CupertinoPageRoute(
+                        Navigator.of(context).push(CupertinoPageRoute(
                           builder: (context) => CurrencyList(
                             currencyOneShortName: widget.currenyOne,
                             currencyTwoShortName: widget.currencyTwo,
@@ -150,7 +150,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(CupertinoPageRoute(
+                        Navigator.of(context).push(CupertinoPageRoute(
                           builder: (context) => CurrencyList(
                             currencyOneShortName: widget.currenyOne,
                             currencyTwoShortName: widget.currencyTwo,
